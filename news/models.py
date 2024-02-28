@@ -22,7 +22,10 @@ class User(models.Model):
         max_length=200,
         validators=[MinLengthValidator(1), MaxLengthValidator(200)],
     )
-    email = models.EmailField()
+    email = models.EmailField(
+        max_length=200,
+        validators=[MinLengthValidator(1), MaxLengthValidator(200)],
+    )
     password = models.CharField(
         max_length=200,
         validators=[MinLengthValidator(1), MaxLengthValidator(200)],
@@ -40,27 +43,24 @@ class News(models.Model):
     title = models.CharField(
         max_length=200,
         validators=[
-            MinLengthValidator(1),
-            MaxLengthValidator(200),
-            validate_more_than_one_word,
             validate_value_is_empty,
+            validate_more_than_one_word,
+            MaxLengthValidator(200),
         ],
     )
     content = models.TextField(
-        validators=[
-            MinLengthValidator(1),
-            validate_value_is_empty,
-        ],
+        validators=[validate_value_is_empty],
     )
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        validators=[validate_date_format, validate_value_is_empty],
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="users"
     )
-    image = models.ImageField(upload_to="img/", null=True, blank=True)
-    categories = models.ForeignKey(
+    created_at = models.DateField(
+        validators=[validate_value_is_empty, validate_date_format],
+    )
+    image = models.ImageField(null=True, blank=True, upload_to="img/")
+    categories = models.ManyToManyField(
         Category,
-        on_delete=models.CASCADE,
+        validators=[validate_value_is_empty],
     )
 
     def __str__(self):

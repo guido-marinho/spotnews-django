@@ -7,15 +7,15 @@ def validate_date_format(date):
     try:
         datetime.strptime(date_str, "%Y-%m-%d")
     except ValueError:
-        raise ValidationError("Date format must be YYYY-MM-DD")
+        raise ValidationError("A data deve estar no formato AAAA-MM-DD.")
 
 
 def validate_more_than_one_word(value):
     words = value.split()
     if len(words) <= 1:
-        raise ValidationError("This field must have more than two words")
+        raise ValidationError("O título deve conter pelo menos 2 palavras.")
 
 
 def validate_value_is_empty(value):
     if value is None or (isinstance(value, str) and len(value.strip()) <= 0):
-        raise ValidationError("This field cannot be empty")
+        raise ValidationError("Este campo não pode estar vazio.")
