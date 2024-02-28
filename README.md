@@ -46,9 +46,11 @@ Rode o servidor:
 ## Dependências
 O Spotnews utiliza as seguintes bibliotecas e ferramentas:
 
-black==23.3.0
-Django==4.2.3
-djangorestframework==3.14.0
-flake8==6.0.0
-mysqlclient==2.2.0
-Pillow==10.0.0
+Python==3.10 <br/>
+
+black==23.3.0 <br/>
+Django==4.2.3 <br/>
+djangorestframework==3.14.0 <br/>
+flake8==6.0.0 <br/>
+mysqlclient==2.2.0  <br/>
+Pillow==10.0.0 <br/>
