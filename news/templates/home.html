@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Página Inicial
+{% endblock %}
+
+{% block header-links %}
+<li><a href="{% url 'home-page' %}">Home</a></li>
+{% endblock %}
+
+{% block content %}
+  <div class="news-container">
+    {% for item in news %}
+    <a href="{% url 'news-details-page' item.id %}" class="news-card">
+        <h2 class="news-title">{{ item.title }}</h2>
+        {% if item.image %}
+        <img src="{% static item.image.url %}" alt={{ item.title }}>
+        {% endif %}
+        <span class="news-date">{{ item.created_at | date:"d/m/Y"}}</span>
+    </a>
+    {% empty %}
+    <p> Não existem notícias cadastrados </p>
+    {% endfor %}
+  </div>
+{% endblock %}

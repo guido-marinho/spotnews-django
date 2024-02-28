@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Página de Detalhes da Notícia
+{% endblock %}
+
+{% block header-links %}
+<li><a href="{% url 'home-page' %}">Home</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="news-detail">
+  <h1 class="news-title">{{ news.title }}</h1>
+  {% if news.image %}
+  <img src="{% static news.image.url %}" alt="">
+  {% endif %}
+  <p class="news-content">{{ news.content }}</p>
+  {% for category in news.categories.all %}
+  <span class="news-categories">{{ category.name }}</span>
+  {% endfor %}
+  <span class="news-author">{{ news.author }}</span>
+  <span class="news-date">{{ news.created_at | date:"d/m/Y"}}</span>
+</div>
+{% endblock %}
